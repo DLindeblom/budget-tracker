@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react"
+import { v4 as uuidv4 } from 'uuid'
 
 const BudgetsContext = React.createContext()
 
@@ -6,28 +7,54 @@ export function useBudgets() {
   return useContext(BudgetsContext)
 }
 
+// budget {
+//   id:
+//   name:
+//   max:
+// }
+
+// expense {
+//   id:
+//   budgetId:
+//   amount:
+//   description:
+// }
+
+
 export const BudgetsProvider = ({ children }) => {
-  const budgets = useState([])
-  const expenses = []
+  const [budgets, setBudgets] = useState([])
+  const [expenses, setExpenses] = useState([])
 
-  function getBudgetExpenses() {
-
+  function getBudgetExpenses(budgetId) {
+    return expenses.filter(expense => expense.budgetId === budgetId)
   } 
   
-  function addExpense() {
-
+  function addExpense({ description, amount, budgetId }) {
+    setExpenses(prevExpenses => {
+      return [...prevExpenses, { id: uuidv4(), description, amount, budgetId }]
+    })
   }
     
-  function addBudget() {
-
+  function addBudget({ name, max }) {
+    setBudgets(prevBudgets => {
+      if (prevBudgets.find(budget => budget,name === name)) {
+        return prevBudgets
+      }
+      return [...prevBudgets, { id: uuidv4(), name, max }]
+    })
   }
 
-  function deleteBudget() {
-
+  function deleteBudget({ id }) {
+    //TODO deal with expenses
+    setBudgets(prevBudgets => {
+      return prevBudgets.filter(budget => budget.id !== id)
+    })
   }
     
-  function deleteExpense() {
-
+  function deleteExpense({ id }) {
+    setExpenses(prevExpenses=> {
+      return prevExpenses.filter(expense => expense.id !== id)
+    })
   }
 
   return (
