@@ -23,8 +23,8 @@ export function useBudgets() {
 
 
 export const BudgetsProvider = ({ children }) => {
-  const [budgets, setBudgets] = useLocalStorage([])
-  const [expenses, setExpenses] = useLocalStorage([])
+  const [budgets, setBudgets] = useLocalStorage("budgets", [])
+  const [expenses, setExpenses] = useLocalStorage("expenses", [])
 
   function getBudgetExpenses(budgetId) {
     return expenses.filter(expense => expense.budgetId === budgetId)
