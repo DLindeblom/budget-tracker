@@ -3,19 +3,19 @@ import Container from "react-bootstrap/Container";
 import AddBudgetModal from "./components/AddBudgetModal";
 import AddExpenseModal from "./components/AddExpenseModal";
 import BudgetCard from "./components/BudgetCard";
-import { useState } from 'react'
+import { useState } from 'react';
 import { BudgetsProvider, useBudgets } from "./contexts/BudgetsContext";
 
 
 function App() {
-  const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
-  const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
-  const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState()
-  const { budgets, getBudgetExpenses } = useBudgets()
+  const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
+  const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
+  const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
+  const { budgets, getBudgetExpenses } = useBudgets();
 
   function openAddExpenseModal(budgetId) {
-    setShowAddExpenseModal(true)
-    setAddExpenseModalBudgetId(budgetId)
+    setShowAddExpenseModal(true);
+    setAddExpenseModalBudgetId(budgetId);
   }
 
 
@@ -39,30 +39,32 @@ function App() {
         }}
         >
           {budgets.map(budget => {
-            const amount = getBudgetExpenses(budget.id).reduce((total, expense) => total + expense.amount, 0)
+            const amount = getBudgetExpenses(budget.id).reduce((total, expense) => total + expense.amount, 0);
             return (
-            <BudgetCard
-              key={budget.id}
-              name={budget.name}
-              amount={amount}
-              max={budget.max} 
-              onAddExpenseClick={() => openAddExpenseModal(budget.id)}
-            />
-          )})}
+              <BudgetCard
+                key={budget.id}
+                name={budget.name}
+                amount={amount}
+                max={budget.max}
+                onAddExpenseClick={() => openAddExpenseModal(budget.id)}
+              />
+            );
+          })}
+          <UncategorizedBudgetCard />
         </div>
       </Container>
-      <AddBudgetModal 
-        show={showAddBudgetModal} 
+      <AddBudgetModal
+        show={showAddBudgetModal}
         handleClose={() => setShowAddBudgetModal(false)}
       />
-      <AddExpenseModal 
-        show={showAddExpenseModal} 
+      <AddExpenseModal
+        show={showAddExpenseModal}
         defaultBudgetId={addExpenseModalBudgetId}
         handleClose={() => setShowAddExpenseModal(false)}
       />
-      
+
     </>
-  )
+  );
 }
 
 export default App;
