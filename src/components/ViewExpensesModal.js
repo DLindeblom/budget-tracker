@@ -1,4 +1,4 @@
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Stack, Button } from "react-bootstrap";
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from '../contexts/BudgetsContext';
 
 export default function AddBudgetModal({ budgetId, handleClose }) {
@@ -6,6 +6,7 @@ export default function AddBudgetModal({ budgetId, handleClose }) {
 
 
   const budget = UNCATEGORIZED_BUDGET_ID === budgetId ? { name: "Uncatgorized", id: UNCATEGORIZED_BUDGET_ID } : budgets.find(b => b.id === budgetId);
+  
   return (
     <Modal show={budgetId != null} onHide={handleClose}>
       <Modal.Header closeButton>
