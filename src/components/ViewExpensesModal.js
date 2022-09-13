@@ -29,9 +29,9 @@ export default function AddBudgetModal({ budgetId, handleClose }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Stack direction="vertical" gap="3">
+        <Stack direction="vertical" gap="3" >
           {expenses.map(expense => (
-            <Stack direction="horizontal" gap="2" key={expense.id}>
+            <Stack className="d-flex" direction="horizontal" gap="2" key={expense.id}>
               <div className="me-auto fs-4">
                 {expense.description}
               </div>
