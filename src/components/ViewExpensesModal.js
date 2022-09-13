@@ -35,6 +35,7 @@ export default function AddBudgetModal({ budgetId, handleClose }) {
               <div className="me-auto fs-4">
                 {expense.description}
               </div>
+              <div className="fs-5">{expense.date}</div>
               <div className="fs-5">
                 {currencyFormatter.format(expense.amount)}
               </div>
