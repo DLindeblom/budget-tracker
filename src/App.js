@@ -6,7 +6,7 @@ import BudgetCard from "./components/BudgetCard";
 import UncategorizedBudgetCard from "./components/UncategorizedBudgetCard";
 import TotalBudgetCard from "./components/TotalBudgetCard";
 import { useState } from 'react';
-import { BudgetsProvider, useBudgets } from "./contexts/BudgetsContext";
+import { BudgetsProvider, UNCATEGORIZED_BUDGET_ID, useBudgets } from "./contexts/BudgetsContext";
 
 
 function App() {
@@ -52,7 +52,9 @@ function App() {
               />
             );
           })}
-          <UncategorizedBudgetCard />
+          <UncategorizedBudgetCard 
+            onAddExpenseClick={openAddExpenseModal}
+          />
           <TotalBudgetCard />
         </div>
       </Container>
