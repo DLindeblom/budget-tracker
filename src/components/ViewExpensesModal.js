@@ -7,7 +7,7 @@ export default function AddBudgetModal({ budgetId, handleClose }) {
 
   const expenses = getBudgetExpenses(budgetId)
   const budget = UNCATEGORIZED_BUDGET_ID === budgetId ? { name: "Uncatgorized", id: UNCATEGORIZED_BUDGET_ID } : budgets.find(b => b.id === budgetId);
-  console.log(expenses)
+  
   return (
     <Modal show={budgetId != null} onHide={handleClose}>
       <Modal.Header closeButton>
