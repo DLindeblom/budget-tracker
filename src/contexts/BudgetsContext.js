@@ -14,18 +14,23 @@ export function useBudgets() {
 export const BudgetsProvider = ({ children }) => {
   
   const [budgets, setBudgets] = useState([])
-  const [expenses, setExpenses] = useLocalStorage("expenses", [])
+  const [expenses, setExpenses] = useState([])
 
   useEffect(() => {
     axios.get('/budgets')
          .then((res) => {
           setBudgets(res.data)
          })
+    axios.get('/expenses')
+         .then((res) => {
+          setExpenses(res.data)
+          console.log(res.data)
+         })
   }, [])
   
 
   function getBudgetExpenses(budgetId) {
-    return expenses.filter(expense => expense.budgetId === budgetId)
+    return expenses.filter(expense => expense.budget_id === budgetId)
   } 
   
   function addExpense({ description, amount, budgetId, date }) {
