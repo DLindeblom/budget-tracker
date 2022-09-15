@@ -34,9 +34,15 @@ export const BudgetsProvider = ({ children }) => {
   } 
   
   function addExpense({ description, amount, budgetId, date }) {
-    setExpenses(prevExpenses => {
-      return [...prevExpenses, { id: uuidv4(), description, amount, budgetId, date }]
-    })
+    // setExpenses(prevExpenses => {
+    //   return [...prevExpenses, { id: uuidv4(), description, amount, budgetId, date }]
+    // })
+    axios.post('/expenses', {description, amount, date, budgetId})
+         .then(() => {
+          setExpenses(prevExpenses => {
+            return []
+          })
+         })
   }
     
   function addBudget({ name, max }) {
