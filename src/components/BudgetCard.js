@@ -13,12 +13,13 @@ export default function BudgetCard({
 }) {
   const classNames = [];
 
+
   if (amount > max) {
     classNames.push("bg-danger", "bg-opacity-10");
   } else if (gray) {
     classNames.push("bg-light");
   }
-  console.log(amount)
+
   return (
     <Card className={classNames.join(" ")}>
       <Card.Body>

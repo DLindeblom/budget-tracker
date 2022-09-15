@@ -24,7 +24,6 @@ export const BudgetsProvider = ({ children }) => {
     axios.get('/expenses')
          .then((res) => {
           setExpenses(res.data)
-          console.log(res.data)
          })
   }, [])
   
@@ -38,19 +37,31 @@ export const BudgetsProvider = ({ children }) => {
     //   return [...prevExpenses, { id: uuidv4(), description, amount, budgetId, date }]
     // })
     axios.post('/expenses', {description, amount, date, budgetId})
-         .then((res) => {
-            console.log(res)
+         .then(() => {
+          
+            axios.get('/expenses')
+            .then((res) => {
+            setExpenses(res.data)
+            })
           })
          
   }
     
-  function addBudget({ name, max }) {
-    setBudgets(prevBudgets => {
-      if (prevBudgets.find(budget => budget.name === name)) {
-        return prevBudgets
-      }
-      return [...prevBudgets, { id: uuidv4(), name, max }]
-    })
+  function addBudget({ user_id, name, max }) {
+
+    axios.post('/budgets', {user_id, name, max})
+         .then(() => {
+            axios.get('/budgets')
+            .then((res) => {
+             setBudgets(res.data)
+            })
+         })
+    // setBudgets(prevBudgets => {
+    //   if (prevBudgets.find(budget => budget.name === name)) {
+    //     return prevBudgets
+    //   }
+    //   return [...prevBudgets, { id: uuidv4(), name, max }]
+    // })
   }
 
   function deleteBudget({ id }) {
