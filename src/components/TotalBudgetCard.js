@@ -4,12 +4,12 @@ import BudgetCard from "./BudgetCard"
 export default function TotalBudgetCard() {
   const { expenses, budgets } = useBudgets()
   const amount = expenses.reduce(
-    (total, expense) => total + expense.amount,
+    (total, expense) => Number(total) + Number(expense.amount),
     0
   )
 
   const max = budgets.reduce(
-    (total, budget) => total + budget.max,
+    (total, budget) => Number(total) + Number(budget.max),
     0
   )
 

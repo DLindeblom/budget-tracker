@@ -1,13 +1,13 @@
 import { Modal, Stack, Button } from "react-bootstrap";
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from '../contexts/BudgetsContext';
-import { currencyFormatter } from "../utils";
+import { currencyFormatter }  from "../utils";
 
 export default function AddBudgetModal({ budgetId, handleClose }) {
   const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } = useBudgets();
 
   const expenses = getBudgetExpenses(budgetId)
   const budget = UNCATEGORIZED_BUDGET_ID === budgetId ? { name: "Uncatgorized", id: UNCATEGORIZED_BUDGET_ID } : budgets.find(b => b.id === budgetId);
-  
+
   return (
     <Modal show={budgetId != null} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -37,7 +37,7 @@ export default function AddBudgetModal({ budgetId, handleClose }) {
               </div>
               <div className="fs-5">{expense.date}</div>
               <div className="fs-5">
-                {currencyFormatter.format(expense.amount)}
+                {currencyFormatter.format(Number(expense.amount))}
               </div>
               <Button 
                 onClick={() => deleteExpense(expense)} 

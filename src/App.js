@@ -43,7 +43,7 @@ function App() {
         }}
         >
           {budgets.map(budget => {
-            const amount = getBudgetExpenses(budget.id).reduce((total, expense) => total + expense.amount, 0);
+            const amount = getBudgetExpenses(budget.id).reduce((total, expense) => Number(total) + Number(expense.amount), 0);
             return (
               <BudgetCard
                 key={budget.id}
