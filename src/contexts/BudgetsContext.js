@@ -70,6 +70,10 @@ export const BudgetsProvider = ({ children }) => {
             .then((res) => {
               setBudgets(res.data)
             })
+            axios.get('/expenses')
+            .then((res) => {
+            setExpenses(res.data)
+            })
          })
     // setExpenses(prevExpenses => {
     //   return prevExpenses.map(expense => {
