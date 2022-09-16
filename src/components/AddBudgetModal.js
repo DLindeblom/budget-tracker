@@ -11,6 +11,7 @@ export default function AddBudgetModal({ show, handleClose }) {
     e.preventDefault()
     addBudget(
       {
+        user_id: 1,
         name: nameRef.current.value,
         max: parseFloat(maxRef.current.value)
       })
