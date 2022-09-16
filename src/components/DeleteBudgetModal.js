@@ -1,21 +1,37 @@
-import { Modal, Stack } from 'react-bootstrap';
+import { Modal, Stack, Button } from 'react-bootstrap';
 import { useBudgets } from '../contexts/BudgetsContext';
 
-export default function DeleteBudgetModal() {
+export default function DeleteBudgetModal({ budgetId, show, cancel, handleClose }) {
 
-  const { deleteBudget } = useBudgets()
+  const { deleteBudget, budgets } = useBudgets()
+
+  const budget = budgets.find(b => b.id === budgetId)
 
   return (
-    <Modal className="bg-danger bg-opacity-7">
+    <Modal show={show} onHide={handleClose}>
       <Modal.Body>
         <Stack>
           <h3 className="text-align-center">
-            Are you sure you want to delete budget - {budget.name}?
+            Are you sure you want to delete budget?
           </h3>
         </Stack>
         <Stack direction='horizontal' gap='2'>
-          <Button onClick={() => deleteBudget(budget)} variant="danger">Delete</Button>
-          <Button variant="secondary">Cancel</Button>
+          <Button 
+            onClick={() => {
+              deleteBudget(budget);
+              cancel()
+              handleClose()
+            }} 
+            variant="danger"
+          >
+            Delete
+          </Button>
+          <Button
+            onClick={cancel} 
+            variant="secondary"
+          >
+            Cancel
+          </Button>
         </Stack>
       </Modal.Body>
     </Modal>
