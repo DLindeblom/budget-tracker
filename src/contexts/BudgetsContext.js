@@ -5,7 +5,7 @@ import axios from "axios";
 
 const BudgetsContext = React.createContext()
 
-export const UNCATEGORIZED_BUDGET_ID = "Uncategorized"
+export const UNCATEGORIZED_BUDGET_ID = 0
 
 export function useBudgets() {
   return useContext(BudgetsContext)
@@ -38,13 +38,11 @@ export const BudgetsProvider = ({ children }) => {
     // })
     axios.post('/expenses', {description, amount, date, budgetId})
          .then(() => {
-          
             axios.get('/expenses')
             .then((res) => {
             setExpenses(res.data)
             })
           })
-         
   }
     
   function addBudget({ user_id, name, max }) {
@@ -77,6 +75,10 @@ export const BudgetsProvider = ({ children }) => {
   }
     
   function deleteExpense({ id }) {
+    console.log(id)
+    axios.delete(`/expenses/delete/${id}`).then(res => {
+      console.log(res)
+    })
     setExpenses(prevExpenses=> {
       return prevExpenses.filter(expense => expense.id !== id)
     })
