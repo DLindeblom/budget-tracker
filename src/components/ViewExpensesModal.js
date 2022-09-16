@@ -29,7 +29,7 @@ export default function AddBudgetModal({ budgetId, handleClose }) {
     )
 
   })
-console.log(oneExpense)
+  
   return (
     <>
       <Modal show={budgetId != null} onHide={handleClose}>

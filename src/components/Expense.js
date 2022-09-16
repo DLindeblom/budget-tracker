@@ -3,20 +3,20 @@ import { currencyFormatter } from "../utils";
 import { Stack, Button } from "react-bootstrap";
 
 
-export default function Expense(
-{  key,
+export default function Expense({  
+  key,
   id,
   description,
   date,
   amount,
   deleteExpense,
-  expense}
-) {
+  expense
+  }) {
 
   const [confirmDeleteExpense, setConfirmDeleteExpense] = useState(false);
 
   return (
-    <Stack direction="vertical" gap="3" >
+    <Stack direction="vertical" gap="3" className='mb-2' key={key}>
       <Stack className="d-flex" direction="horizontal" gap="2">
 
         {!confirmDeleteExpense ? (
