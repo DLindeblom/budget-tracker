@@ -9,13 +9,13 @@ export default function DeleteBudgetModal({ budgetId, show, cancel, handleClose 
 
   return (
     <Modal show={show} onHide={handleClose}>
-      <Modal.Body>
+      <Modal.Body className='bg-danger bg-opacity-10'>
         <Stack>
-          <h3 className="text-align-center">
+          <h3 className="text-center">
             Are you sure you want to delete budget?
           </h3>
         </Stack>
-        <Stack direction='horizontal' gap='2'>
+        <Stack direction='horizontal' gap='2' className='d-flex justify-content-around mt-4'>
           <Button 
             onClick={() => {
               deleteBudget(budget);
