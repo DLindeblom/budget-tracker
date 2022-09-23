@@ -8,7 +8,7 @@ export default function LogoutButton() {
   const { logout } = useAuth0();
 
   return (
-    <Button variant="danger" onClick={() => logout({ returnTo: window.location.origin}) }>
+    <Button variant="danger" onClick={() => logout({ returnTo: 'http://localhost:3000/login'}) }>
       Log Out
     </Button>
   )
